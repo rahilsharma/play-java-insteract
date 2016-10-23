@@ -9,5 +9,15 @@ GET     /                           controllers.Application.index()
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 
+
 # Insteract REST interface
 GET      /getAllData                   					controllers.Application.getAllData()
+GET      /getAllSortedData/:order               controllers.Application.getAllSortedData(order)
+GET      /getSortedData/:order/:objectId                controllers.Application.getSortedData(order,objectId)
+GET      /getObject/:objectId                			controllers.Application.getObject(objectId)
+GET      /getInitialData                    controllers.Application.getInitialData()
+GET      /getGraphData             controllers.Application.getGraphData()
+POST	/addData						controllers.Application.addData()
+PUT		/updateData/:objectId	controllers.Application.updateData(objectId)
+
+
