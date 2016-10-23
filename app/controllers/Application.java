@@ -51,6 +51,37 @@ public class Application extends Controller {
       	  return ok(objectNode);
     	}
     }
+    public static Result getInitialData() {
+      try{
+    	List<Insteract> insteract = (List<Insteract>) Cache.get("insteract");
+    	int totalRecords = insteract.size();
+    	int customerCount = 0;
+    	int totalValue = 0;
+    	HashSet noDupSet = new HashSet();
+    	for (Insteract tmpElement : insteract) {
+    		String companyId = tmpElement.getCompanyId();
+    		Data data = tmpElement.getData();
+    		ListI list = data.getList();
+    		Item item = list.getItem();
+    		List<Integer> suggested = item.getSuggested(); 
+    		noDupSet.add(companyId);
+    		totalValue = totalValue + suggested.get(0);
+    		}
+    	customerCount = noDupSet.size();
+    	InitialValue initialValue = new InitialValue();
+    	initialValue.setCustomerCount(customerCount);
+    	initialValue.setTotalValue(totalValue);
+    	initialValue.setTotalRecords(totalRecords);
+    	ObjectMapper mapper = new ObjectMapper();
+    	JsonNode node;
+    	node = mapper.convertValue(initialValue, JsonNode.class);
+    	return ok(node);
+      }catch (Throwable t) {
+    	  Logger.error("Exception with getInitialData", t);
+    	  ObjectNode objectNode = returnErrorMessage("Error",0,"Reason Unknown");
+      	  return ok(objectNode);
+    	}
+    }
     
 
 }
