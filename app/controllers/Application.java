@@ -28,6 +28,23 @@ public class Application extends Controller {
         return ok(index.render("Your new application is ready."));
     }
 
+     * Returns all the data
+     * 
+     * @return a list of dataObjects.
+     */
+    public static Result getAllData() {
+    	try{
+    	List<Insteract> insteract = (List<Insteract>) Cache.get("insteract");
+    	ObjectMapper mapper = new ObjectMapper();
+    	JsonNode node;
+    	node = mapper.convertValue(insteract, JsonNode.class);
+    	return ok(node);
+    	}catch (Throwable t) {
+    	  Logger.error("Exception with getAllData", t);
+    	  ObjectNode objectNode = returnErrorMessage("Error",0,"Reason Unknown");
+      	  return ok(objectNode);
+    	}
+    }
     
 
 }
