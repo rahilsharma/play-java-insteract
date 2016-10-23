@@ -6,4 +6,5 @@ activator clean compile
 activator run
 
 ToDo:
-Need to see if data
+Need to see if why app start is getting called on every request.
+Use lamda and streams
