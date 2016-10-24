@@ -20,4 +20,7 @@ GET      /getGraphData             controllers.Application.getGraphData()
 POST	/addData						controllers.Application.addData()
 PUT		/updateData/:objectId	controllers.Application.updateData(objectId)
 
+#Using lamda feature
+GET /getInitialDataLambda             controllers.LambdaApplication.getInitialData()
+
 
